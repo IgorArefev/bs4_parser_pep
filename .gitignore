@@ -26,6 +26,8 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.github/
+logs/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -145,5 +147,3 @@ dmypy.json
 
 .mypy_cache
 http_cache.sqlite
-downloads/
-logs/
