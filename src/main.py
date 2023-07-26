@@ -1,5 +1,6 @@
 import logging
 import re
+from collections import defaultdict
 from urllib.parse import urljoin
 
 import requests_cache
@@ -106,7 +107,7 @@ def pep(session):
     section_tag = find_tag(soup, 'section', attrs={'id': 'numerical-index'})
     tbody_tag = find_tag(section_tag, 'tbody')
     tr_tag = tbody_tag.find_all('tr')
-    counter = {}
+    counter = defaultdict(int)
 
     for string in tqdm(tr_tag):
         td_tag = find_tag(string, 'td')
@@ -132,8 +133,8 @@ def pep(session):
                 )
                 logging.info(error_msg)
                 continue
-        counter[dt] = counter.get(dt, 0) + 1
-    counter['Total'] = sum(value for value in counter.values())
+        counter[dt] += 1
+    counter['Total'] = sum(counter.values())
     results = [
         ('Статус', 'Количество')
     ]
